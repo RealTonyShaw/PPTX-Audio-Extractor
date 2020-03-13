@@ -5,10 +5,16 @@ import shutil
 from pathlib import Path
 
 
+def duplicate(path):
+    shutil.copy2(path, path + '_cpy')
+    return path + '_cpy'
+
+
 def modify_to_rar(path):
-    if path.endswith('.pptx'):
-        new_str = path[:-5] + '.zip'
+    if path.endswith('.pptx_cpy'):
+        new_str = path[:-9] + '.zip'
         os.rename(path, new_str)
+        return new_str
     else:
         print('File Type Error')
 
@@ -20,6 +26,7 @@ def decompress(path):
     os.chdir(tmp_decompression_path)
     zip_file.extractall()
     zip_file.close()
+    return tmp_decompression_path
 
 
 def extract_audio(path):
@@ -35,4 +42,8 @@ def rm_cache(path):
     shutil.rmtree(path)
 
 
-if __name__ == '__main__':
+def extract_from(path):
+    duplication_path = duplicate(path)
+    modification_path = modify_to_rar(duplication_path)
+    decompression_path = decompress(modification_path)
+    extract_audio(decompression_path)
