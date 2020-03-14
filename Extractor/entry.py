@@ -9,4 +9,4 @@ def extract(path):
 
 
 if __name__ == '__main__':
-   extract()
+    extract()

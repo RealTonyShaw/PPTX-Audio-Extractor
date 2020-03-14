@@ -29,6 +29,7 @@ def decompress(path):
     return tmp_decompression_path
 
 
+# extract audios to the parent directory of current path
 def extract_audio(path):
     files = glob.iglob(os.path.join(path + '/ppt/media', "*.m4a"))
     original_path = Path(path)
@@ -39,7 +40,10 @@ def extract_audio(path):
 
 
 def rm_cache(path):
-    shutil.rmtree(path)
+    if path.endswith('.zip'):
+        os.remove(path)
+    else:
+        shutil.rmtree(path)
 
 
 def extract_from(path):
@@ -47,3 +51,5 @@ def extract_from(path):
     modification_path = modify_to_rar(duplication_path)
     decompression_path = decompress(modification_path)
     extract_audio(decompression_path)
+    rm_cache(modification_path)
+    rm_cache(decompression_path)
