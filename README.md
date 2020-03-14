@@ -1,5 +1,7 @@
 # PPTX-Audio-Extractor
 
+English | [中文](README.zh-CN.md)
+
 This gadget allows you to extract the audio files inserted into the `.pptx` powerpoint.
 
 ## Usage
